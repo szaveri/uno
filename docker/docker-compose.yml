@@ -1,0 +1,32 @@
+version: '3.7'
+
+services:
+    web-app:
+        build: ./client
+        image: client
+        container_name: web-app
+        volumes:
+        - ./../client:/app
+        expose:
+        - '3000'
+        ports:
+        - 3000:3000
+        restart: on-failure
+        environment:
+        - CHOKIDAR_USEPOLLING=true
+        extra_hosts: 
+        - localhost:127.0.0.1
+        stdin_open: true
+    server:
+        build: ./server
+        image: server
+        container_name: cnserver
+        volumes:
+        - ./../server:/server
+        expose:
+        - '5000'
+        - '9229'
+        ports:
+        - 5000:5000
+        - 9229:9229
+        stdin_open: true
