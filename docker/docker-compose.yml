@@ -14,16 +14,16 @@ services:
         extra_hosts: 
         - localhost:127.0.0.1
         stdin_open: true
-    # server:
-    #     build: ./server
-    #     image: server
-    #     container_name: cnserver
-    #     volumes:
-    #     - ./../server:/server
-    #     expose:
-    #     - '5000'
-    #     - '9229'
-    #     ports:
-    #     - 5000:5000
-    #     - 9229:9229
-    #     stdin_open: true
+    server:
+        build: ./server
+        image: server
+        container_name: server
+        volumes:
+        - ./../server:/server
+        expose:
+        - '5000'
+        - '9229'
+        ports:
+        - 5000:5000
+        - 9229:9229
+        stdin_open: true

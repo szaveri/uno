@@ -5,6 +5,6 @@ WORKDIR /server
 # add `/app/node_modules/.bin` to $PATH
 ENV PATH /server/node_modules/.bin:$PATH
 
-RUN npm install -g nodemon
+RUN npm install -g nodemon ts-node
 
-CMD ["npm", "run", "devStart"]
+CMD ["npm", "run", "start:dev"]

@@ -24,7 +24,7 @@
   },
   "scripts": {
     "build": "node_modules/webpack/bin/webpack.js --mode production",
-    "serve": "node_modules/webpack/bin/webpack.js --mode production && node dist/server.js"
+    "serve": "nodemon dist/server.js"
   },
   "eslintConfig": {
     "extends": "react-app"

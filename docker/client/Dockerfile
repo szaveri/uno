@@ -10,7 +10,7 @@ RUN rm -rf build/
 ENV PATH /app/node_modules/.bin:$PATH
 
 # install app dependencies
-RUN npm install --silent
+RUN npm install -g --silent npm-watch
 
 # start app
-CMD ["npm", "run", "serve"]
+CMD ["npm", "run", "watch"]

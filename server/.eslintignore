@@ -1,0 +1,10 @@
+  
+*.json
+*.spec.ts
+*.d.ts
+*.md
+*.sh
+*.config.js
+dist/
+node_modules/
+docs/

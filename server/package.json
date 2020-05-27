@@ -1,0 +1,45 @@
+{
+  "name": "server",
+  "version": "1.0.0",
+  "description": "Uno backend Express app",
+  "main": "index.ts",
+  "scripts": {
+    "build": "./node_modules/webpack/bin/webpack.js --mode=production",
+    "build:dev": "./node_modules/webpack/bin/webpack.js --mode=development",
+    "start:dev": "nodemon --watch 'src/**/*.ts' --ignore 'src/**/*.spec.ts' --exec 'ts-node' src/index.ts",
+    "test": "jest",
+    "lint": "./node_modules/eslint/bin/eslint.js ."
+  },
+  "author": "Siddharth Zaveri",
+  "license": "MIT",
+  "dependencies": {
+    "express": "4.17.1",
+    "moment": "2.26.0",
+    "winston": "3.2.1"
+  },
+  "devDependencies": {
+    "@types/express": "4.17.6",
+    "@types/jest": "25.2.3",
+    "@types/node": "14.0.5",
+    "@typescript-eslint/eslint-plugin": "3.0.1",
+    "@typescript-eslint/parser": "3.0.1",
+    "better-docs": "2.0.1",
+    "eslint": "7.1.0",
+    "eslint-config-airbnb-base": "14.1.0",
+    "eslint-import-resolver-typescript": "2.0.0",
+    "eslint-plugin-import": "2.20.2",
+    "eslint-plugin-jsdoc": "25.4.2",
+    "jest": "26.0.1",
+    "jsdoc": "3.6.4",
+    "nodemon": "2.0.4",
+    "ts-jest": "26.0.0",
+    "ts-loader": "7.0.5",
+    "tsconfig-paths": "3.9.0",
+    "tsconfig-paths-webpack-plugin": "3.2.0",
+    "typescript": "3.9.3",
+    "uglifyjs-webpack-plugin": "2.2.0",
+    "webpack": "4.43.0",
+    "webpack-cli": "3.3.11",
+    "webpack-node-externals": "1.7.2"
+  }
+}
