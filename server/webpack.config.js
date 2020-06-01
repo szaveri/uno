@@ -1,7 +1,7 @@
 const path = require('path');
 const nodeExternals = require('webpack-node-externals');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 
 const config = {
   entry: {
@@ -53,9 +53,8 @@ module.exports = (env, argv) => {
   if (argv.mode === 'production') {
     config.mode = 'production';
     config.optimization = {
-      minimizer: [
-        new UglifyJsPlugin(),
-      ],
+      minimize: true,
+      minimizer: [new TerserPlugin()],
     };
   }
 

@@ -40,21 +40,6 @@ io.of('/uno').on('connection', (socket: Socket) => {
   });
 });
 
-io.use((socket: Socket, next: any) => {
-  if (socket.handshake.headers.cookie) {
-    const cookies = parse(socket.handshake.headers.cookie);
-    try {
-      jsonwebtoken.verify(cookies.token, app.locals.TOKEN_SECRET);
-      next();
-    } catch (err) {
-      console.log('Invalid token');
-      socket.emit('unauthorized', { message: 'Invalid token', });
-    }
-  } else {
-    socket.emit('unauthorized', { message: 'Failed to get token', });
-  }
-});
-
 server.listen(APP_PORT, () => {
   console.log(`Server running on port ${APP_PORT}`);
 });

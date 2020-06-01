@@ -1,7 +1,7 @@
 const path = require('path');
 const nodeExternals = require('webpack-node-externals');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 const HtmlWebPackPlugin = require("html-webpack-plugin");
 
 const serverConfig = {
@@ -45,9 +45,8 @@ const serverConfig = {
     ],
   },
   optimization: {
-    minimizer: [
-      new UglifyJsPlugin(),
-    ],
+    minimize: true,
+    minimizer: [new TerserPlugin()],
   },
 }
 

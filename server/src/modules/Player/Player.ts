@@ -1,5 +1,5 @@
 import { Application, } from 'express';
-import { Socket, } from 'socket.io';
+import { Socket, Packet, } from 'socket.io';
 import { v4 as uuidv4, } from 'uuid';
 import { parse, } from 'cookie';
 
@@ -27,13 +27,29 @@ export default class Player {
 
   addListeners() {
     Object.keys(this.handler).forEach((event: string) => {
-      console.log(`Established ${event}`);
       this.socket.on(event, this.handler[event]);
+    });
+
+    this.socket.use((packet: Packet, next: any) => {
+      if (packet[0] !== 'createGame' && packet[0] !== 'joinGame') {
+        if (this.socket.handshake.headers.cookie) {
+          const cookies = parse(this.socket.handshake.headers.cookie);
+          try {
+            jsonwebtoken.verify(cookies.token, this.app.locals.TOKEN_SECRET);
+            next();
+          } catch (err) {
+            this.unauthorized({ message: 'Invalid token', });
+          }
+        } else {
+          this.unauthorized({ message: 'Failed to get token', });
+        }
+      } else {
+        next();
+      }
     });
   }
 
   createGame(data: any) {
-    console.log(`Received game creation request ${data}`);
     const gameId = uuidv4();
     const token = this.createToken(data.name);
 
@@ -48,7 +64,6 @@ export default class Player {
     };
 
     this.socket.join(gameId);
-    console.log(`Sending back authentication ${token} ${gameId}`);
     this.socket.emit('authenticate', {
       token,
       gameId,
@@ -81,13 +96,11 @@ export default class Player {
   }
 
   disconnect() {
-    const playerData = this.getPlayerData() as PlayerData;
-    this.message(playerData.gameId, `Player ${playerData.name} has left the game`);
-    this.socket.disconnect(true);
+    this.socket.leaveAll();
   }
 
-  unauthorized(data: any) {
-    console.log(data.message);
+  unauthorized(message: any) {
+    this.socket.emit('message', message);
     this.socket.disconnect(true);
   }
 
