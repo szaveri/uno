@@ -10,7 +10,7 @@ RUN rm -rf build/
 ENV PATH /app/node_modules/.bin:$PATH
 
 # install app dependencies
-RUN npm install -g --silent npm-watch
+RUN npm install -g --silent nodemon
 
 # start app
-CMD ["npm", "run", "watch"]
+CMD ["npm", "run", "serve"]

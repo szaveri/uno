@@ -4,7 +4,7 @@ services:
     web-app:
         build: ./client
         image: client
-        container_name: web-app
+        container_name: unoclient
         volumes:
         - ./../client:/app
         expose:
@@ -17,7 +17,7 @@ services:
     server:
         build: ./server
         image: server
-        container_name: server
+        container_name: unoserver
         volumes:
         - ./../server:/server
         expose:
